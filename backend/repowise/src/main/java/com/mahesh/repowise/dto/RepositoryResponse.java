@@ -16,7 +16,16 @@ public class RepositoryResponse {
 
     private LocalDateTime createdAt;
 
-    // getters and setters
+    private Integer totalFiles;
+
+    public Integer getTotalFiles() {
+        return totalFiles;
+    }
+
+    public void setTotalFiles(Integer totalFiles) {
+        this.totalFiles = totalFiles;
+    }
+// getters and setters
 
     public RepositoryResponse(Long id, String name, String githubUrl, RepositoryStatus status, LocalDateTime createdAt) {
         this.id = id;

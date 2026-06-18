@@ -24,6 +24,8 @@ public class RepositoryEntity {
 
     private String localPath;
 
+    private Integer totalFiles;
+
     public RepositoryEntity(Long id, String name, String githubUrl, RepositoryStatus status, LocalDateTime createdAt, String localPath) {
         this.id = id;
         this.name = name;
@@ -31,6 +33,24 @@ public class RepositoryEntity {
         this.status = status;
         this.createdAt = createdAt;
         this.localPath = localPath;
+    }
+
+    public RepositoryEntity(Long id, String name, String githubUrl, RepositoryStatus status, LocalDateTime createdAt, String localPath, Integer totalFiles) {
+        this.id = id;
+        this.name = name;
+        this.githubUrl = githubUrl;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.localPath = localPath;
+        this.totalFiles = totalFiles;
+    }
+
+    public Integer getTotalFiles() {
+        return totalFiles;
+    }
+
+    public void setTotalFiles(Integer totalFiles) {
+        this.totalFiles = totalFiles;
     }
 
     public RepositoryEntity() {

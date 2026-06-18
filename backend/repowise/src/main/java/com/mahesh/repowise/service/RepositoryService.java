@@ -93,7 +93,7 @@ public class RepositoryService {
         response.setGithubUrl(repository.getGithubUrl());
         response.setStatus(repository.getStatus());
         response.setCreatedAt(repository.getCreatedAt());
-
+        response.setTotalFiles(repository.getTotalFiles());
         return response;
     }
 }
