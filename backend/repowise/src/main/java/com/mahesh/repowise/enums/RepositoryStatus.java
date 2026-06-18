@@ -4,6 +4,7 @@ public enum RepositoryStatus {
     PENDING,
     CLONING,
     SCANNING,
+    CHUNKING,
     READY,
     FAILED
 }

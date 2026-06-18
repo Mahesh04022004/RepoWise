@@ -1,5 +1,6 @@
 package com.mahesh.repowise.service;
 
+import com.mahesh.repowise.chunking.ChunkingService;
 import com.mahesh.repowise.entity.RepositoryEntity;
 import com.mahesh.repowise.enums.RepositoryStatus;
 import com.mahesh.repowise.git.GitCloneService;
@@ -14,14 +15,16 @@ public class RepositoryProcessor {
     private final RepositoryRepository repositoryRepository;
     private final GitCloneService gitCloneService;
     private final RepositoryScanner repositoryScanner;
+    private final ChunkingService chunkingService;
 
     public RepositoryProcessor(
             RepositoryRepository repositoryRepository,
-            GitCloneService gitCloneService, RepositoryScanner repositoryScanner) {
+            GitCloneService gitCloneService, RepositoryScanner repositoryScanner, ChunkingService chunkingService) {
 
         this.repositoryRepository = repositoryRepository;
         this.gitCloneService = gitCloneService;
         this.repositoryScanner = repositoryScanner;
+        this.chunkingService = chunkingService;
     }
 
     @Async
@@ -55,6 +58,15 @@ public class RepositoryProcessor {
                             repository);
 
             repository.setTotalFiles(totalFiles);
+
+            repository.setStatus(
+                    RepositoryStatus.CHUNKING);
+
+            repositoryRepository.save(repository);
+
+            int totalChunks =
+                    chunkingService.chunkRepository(
+                            repository);
 
             repository.setStatus(
                     RepositoryStatus.READY);
