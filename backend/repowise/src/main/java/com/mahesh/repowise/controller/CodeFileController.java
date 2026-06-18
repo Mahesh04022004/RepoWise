@@ -1,6 +1,7 @@
 package com.mahesh.repowise.controller;
 
 import com.mahesh.repowise.dto.ApiResponse;
+import com.mahesh.repowise.dto.CodeFileContentResponse;
 import com.mahesh.repowise.dto.CodeFileResponse;
 import com.mahesh.repowise.service.CodeFileService;
 import org.springframework.http.ResponseEntity;
@@ -38,4 +39,19 @@ public class CodeFileController {
                 )
         );
     }
+
+    @GetMapping("/{repositoryId}/files/{fileId}")
+    public ResponseEntity<ApiResponse<CodeFileContentResponse>>
+    getFileContent(
+            @PathVariable Long repositoryId,
+            @PathVariable Long fileId) {
+
+        return ResponseEntity.ok(
+                ApiResponse.success(
+                        "File content fetched successfully",
+                        codeFileService.getFileContent(fileId)
+                )
+        );
+    }
+
 }
